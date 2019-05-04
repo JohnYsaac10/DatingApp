@@ -51,17 +51,18 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> login(UserForLoginDto userForLogin)
         {
+            //throw new Exception("computer says no!");
             var userFromRepo = await _repo.Login(userForLogin.Username, userForLogin.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();
 
-        var claims = new[]{
+            var claims = new[]{
 
-             new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-            new Claim(ClaimTypes.Name, userFromRepo.Username)
+                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+                new Claim(ClaimTypes.Name, userFromRepo.Username)
 
-        };
+            };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
@@ -75,17 +76,18 @@ namespace DatingApp.API.Controllers
 
             };
 
-         var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-         var token = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
 
-        return Ok(new {
-            token = tokenHandler.WriteToken(token)
-        });
+            return Ok(new {
+                token = tokenHandler.WriteToken(token)
+            });
 
         
         }
 
     }
 }
+
