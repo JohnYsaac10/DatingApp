@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatingApp.API.Dtos
 {
-    public class UserForDetaledDto
+    public class UserForDetailedDto
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -21,6 +21,6 @@ namespace DatingApp.API.Dtos
         public string City { get; set; }
         public string Country { get; set; }
         public string PhotoUrl { get; set; }
-        public ICollection<PhotoForDetailedDto> photos { get; set; }
+        public ICollection<PhotoForDetailedDto> Photos { get; set; }
     }
 }

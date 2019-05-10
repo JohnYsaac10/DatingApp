@@ -12,7 +12,7 @@ namespace DatingApp.API.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserForDetaledDto>()
+            CreateMap<User, UserForDetailedDto>()
                 .ForMember(dest => dest.PhotoUrl, opt => {
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
@@ -28,6 +28,12 @@ namespace DatingApp.API.Helpers
                 });
 
             CreateMap<Photo, PhotoForDetailedDto>();
+
+            CreateMap<UserForUpdateDto, User>();
+
+            CreateMap<Photo, PhotoForReturnDto>();
+
+            CreateMap<PhotoForCreationDto, Photo>();
         }
     }
 }
